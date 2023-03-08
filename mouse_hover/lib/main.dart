@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mouse_hover/hover_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -112,6 +114,49 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            ChangeNotifierProvider<StartButtonProvider>(
+              
+              create: (BuildContext context) => StartButtonProvider(),
+              child: Consumer<StartButtonProvider>(builder: (BuildContext context, StartButtonProvider _startButtonProvider, Widget? _) {
+                return MouseRegion(
+                  onEnter: (PointerEvent details) {
+                    _startButtonProvider.isRegion();
+                  },
+                  onExit: (PointerEvent details) {
+                    _startButtonProvider.isnRegion();
+                  },
+                  child: InkWell(
+                    onTap: () {
+                      _startButtonProvider.clicked();
+                      
+                    },
+                    child: (() {
+                      switch (_startButtonProvider.mouse_state) {
+                        case 1:
+                          return Container(
+                            width: 100,
+                            height: 100,
+                            color: Colors.redAccent,
+                          );
+                        case 2:
+                          return Container(
+                            width: 100,
+                            height: 100,
+                            color: Colors.greenAccent,
+                          );
+                      }
+                      return Container(
+                        width: 100,
+                        height: 100,
+                        color: Colors.indigoAccent,
+                      );
+                    })(),
+                  ));
+              }
+              ),
+              
+              
+            )
           ],
         ),
       ),
