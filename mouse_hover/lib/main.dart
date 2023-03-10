@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mouse_hover/button.dart';
+import 'package:mouse_hover/eg_animation/animation_home.dart';
 import 'package:mouse_hover/hover_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -137,7 +138,10 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: (){
+          _incrementCounter();
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => AnimationHomePage() ));
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
